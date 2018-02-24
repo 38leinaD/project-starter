@@ -1,1 +1,1 @@
-include ':template-artifactid'
+rootProject.name = 'template-artifactid'

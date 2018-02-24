@@ -31,7 +31,8 @@ create() {
         echo "No artifactid given"
         exit 1
     fi
-
+    
+    clear
     echo "Creating project named '$artifactid' from template '$template' in current folder"
     mkdir -p $artifactid
     cp -r $DIR/$template/* $artifactid/
@@ -49,7 +50,7 @@ create() {
 
     # Fix packagenames in Java-code
     local java_package_name="${groupid}.${artifactid//-/}"
-    find $artifactid -type f -name "*.java" -exec sed -i "s/packagename/${java_package_name}/g" {} \;
+    find $artifactid -type f \( -name "*.java" -o -name "build.gradle" \) -exec sed -i "s/packagename/${java_package_name}/g" {} \;
 
     # Set groupid/artifactid in pom.xml/build.gradle
     find $artifactid -type f -exec sed -i "s/template-artifactid/${artifactid}/g" {} \;

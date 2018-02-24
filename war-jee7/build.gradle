@@ -1,5 +1,6 @@
 apply plugin: 'war'
 apply plugin: 'maven'
+apply plugin: 'eclipse-wtp'
 
 group = 'template-groupid'
 version = '1.0-SNAPSHOT'
@@ -12,7 +13,7 @@ repositories {
 }
 
 dependencies {
-	providedCompile 'javax:javaee-api:7.0'
+    providedCompile 'javax:javaee-api:7.0'
     //compile 'org.primefaces:primefaces:6.1'
 
     testCompile 'junit:junit:4.12'
