@@ -52,6 +52,18 @@ create() {
     local java_package_name="${groupid}.${artifactid//-/}"
     find $artifactid -type f \( -name "*.java" -o -name "build.gradle" \) -exec sed -i "s/packagename/${java_package_name}/g" {} \;
 
+    # Fix subproject folder-names
+    find $artifactid -type d -name "template-artifactid-*" -print0
+    find $artifactid -type d -name "template-artifactid-*" | while read file; do \
+        #dir=$(dirname $f)
+        #file=$(basename $f)
+        #rename "s/template-artifactid-(.*)\$/$artifactid-\$1/" $f
+        newfile=${file/template-artifactid/$artifactid}
+        mv $file $newfile
+    done;
+
+
+
     # Set groupid/artifactid in pom.xml/build.gradle
     find $artifactid -type f -exec sed -i "s/template-artifactid/${artifactid}/g" {} \;
     find $artifactid -type f -exec sed -i "s/template-groupid/${groupid}/g" {} \;
