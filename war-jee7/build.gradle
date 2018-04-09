@@ -24,7 +24,7 @@ war {
 	archiveName 'template-artifactid.war'
 }
 
-task deployEar(type: Copy, dependsOn: 'war') {
+task deployWar(type: Copy, dependsOn: 'war') {
 	dependsOn 'build'
 	from war.archivePath
 	into "${System.env.DEPLOY_TO}"
