@@ -10,10 +10,10 @@ import javax.ws.rs.Path;
 public class HelloResource {
 
 	@Inject
-	Service s;
+	HelloService service;
 
 	@GET
 	public String test() {
-		return "Hello @ " + System.currentTimeMillis();
+		return service.hello();
 	}
 }

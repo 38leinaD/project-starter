@@ -3,9 +3,9 @@ package packagename.boundary;
 import javax.ejb.Stateless;
 
 @Stateless
-public class Service {
+public class HelloService {
     public String hello() {
-        return "hello world";
+        return "hello @" + System.currentTimeMillis();
     }
     
 }
