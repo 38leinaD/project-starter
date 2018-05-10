@@ -25,7 +25,9 @@ war {
 }
 
 task deployWar(type: Copy, dependsOn: 'war') {
-	dependsOn 'build'
-	from war.archivePath
-	into "${System.env.DEPLOY_TO}"
+    group 'build'
+    description 'Copy the artifact to $DEPLOY_TO'
+    dependsOn 'build'
+    from war.archivePath
+    into "${System.env.DEPLOY_TO}"
 }
