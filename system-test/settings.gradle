@@ -1,0 +1,2 @@
+rootProject.name = 'template-artifactid-st'
+enableFeaturePreview("IMPROVED_POM_SUPPORT")

@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+  appsvr:
+    image: jboss/wildfly:12.0.0.Final
+    command: /opt/jboss/wildfly/bin/standalone.sh --server-config=standalone-full.xml -b "0.0.0.0"
+    ports:
+     - "80:8080"
+    volumes:
+     - "${PROJECT}/build/libs/:/opt/jboss/wildfly/standalone/deployments/"
+    healthcheck:
+      test: curl --fail http://127.0.0.1:8080/hello/resources/health || exit 1
+      interval: 5s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
