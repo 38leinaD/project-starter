@@ -3,9 +3,9 @@ set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 usage() {
-    echo "usage: $(basename $0) <template-name> <groupid> <artifactid>"
+    echo "usage: $(basename $0) <groupid> <artifactid> <template-name>"
     echo "       $(basename $0) --list"
-    echo "example: $(basename $0) war-jee7 de.dplatz webapp"
+    echo "example: $(basename $0) de.dplatz webapp war-jee7"
 }
 
 list() {
@@ -13,9 +13,9 @@ list() {
 }
 
 create() {
-    local template=$1
-    local groupid=$2
-    local artifactid=$3
+    local groupid=$1
+    local artifactid=$2
+    local template=$3
 
     if ! [ -d $DIR/$template ]; then
         echo "No template with name '$template'"
@@ -62,11 +62,23 @@ create() {
         mv $file $newfile
     done;
 
-
-
     # Set groupid/artifactid in pom.xml/build.gradle
     find $artifactid -type f -exec sed -i "s/template-artifactid/${artifactid}/g" {} \;
     find $artifactid -type f -exec sed -i "s/template-groupid/${groupid}/g" {} \;
+
+    if [[ "$artifactid" == *-st ]]; then
+        # system-test project
+        parentid=${artifactid%-st}
+        if [ -d "$parentid" ]; then
+            parentpath=$(realpath $parentid)
+            echo "Found parent-project @ $parentpath"
+            echo "PROJECT=$parentpath" >> $artifactid/.env
+            echo "COMPOSE_PROJECT_NAME=$parentid" >> $artifactid/.env
+            find $parentpath -type f -exec sed -i "s/appname/${parentid}/g" {} \;
+            find $artifactid -type f -exec sed -i "s/appname/${parentid}/g" {} \;
+        fi
+    fi
+
     tree -C $artifactid/
 }
 

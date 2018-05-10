@@ -19,7 +19,7 @@ public class HealthCheckST {
 
     @Before
     public void init() {
-        tut = ClientBuilder.newClient().target("http://localhost/hello");
+        tut = ClientBuilder.newClient().target("http://localhost/appname");
     }
 
     @Test

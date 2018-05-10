@@ -7,7 +7,7 @@ services:
     volumes:
      - "${PROJECT}/build/libs/:/config/dropins/"
     healthcheck:
-      test: wget --quiet --tries=1 --spider http://localhost:9080/hello/resources/health || exit 1
+      test: wget --quiet --tries=1 --spider http://localhost:9080/appname/resources/health || exit 1
       interval: 5s
       timeout: 10s
       retries: 3

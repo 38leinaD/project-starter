@@ -8,7 +8,7 @@ services:
     volumes:
      - "${PROJECT}/build/libs/:/opt/jboss/wildfly/standalone/deployments/"
     healthcheck:
-      test: curl --fail http://127.0.0.1:8080/hello/resources/health || exit 1
+      test: curl --fail http://127.0.0.1:8080/appname/resources/health || exit 1
       interval: 5s
       timeout: 10s
       retries: 3
