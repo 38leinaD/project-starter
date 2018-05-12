@@ -1,7 +1,17 @@
 version: '3.4'
 services:
+  # db:
+  #   image: postgres:9.5
+  #   ports:
+  #    - "5433:5432"
+  # db:
+  #   image: wnameless/oracle-xe-11g
+  #   ports:
+  #    - "1521:1521"
   appsvr:
-    image: jboss/wildfly:12.0.0.Final
+    # image: 38leinad/wildfly-10-jdbc
+    image: jboss/wildfly:10.1.0.Final
+    # Add "wait-for db:1521 -- <command>" to command to wait on another service.
     command: /opt/jboss/wildfly/bin/standalone.sh --server-config=standalone-full.xml -b "0.0.0.0"
     ports:
      - "80:8080"
