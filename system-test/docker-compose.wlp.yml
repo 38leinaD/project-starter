@@ -1,7 +1,9 @@
 version: '3.4'
 services:
   appsvr:
-    image: openliberty/open-liberty:javaee7
+    #image: 38leinad/wlp-javaee7-jdbc:latest
+    #image: openliberty/open-liberty:javaee7
+    image: websphere-liberty:javaee7
     ports:
      - "80:9080"
     volumes:
