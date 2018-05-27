@@ -1,4 +1,4 @@
-package packagename.boundary;
+package packagename.business.boundary;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
