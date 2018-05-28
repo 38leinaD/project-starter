@@ -34,8 +34,7 @@ create() {
     
     clear
     echo "Creating project named '$artifactid' from template '$template' in current folder"
-    mkdir -p $artifactid
-    cp -r $DIR/$template/* $artifactid/
+    cp -r $DIR/$template $artifactid
 
     find $artifactid -type d -name "packagename" | while read dir; do
         # Derive packagenames from groupid/artifactid
